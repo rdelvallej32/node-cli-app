@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/pmbenjamin/node-cli-app/issues"
   },
-  "homepage": "https://github.com/pmbenjamin/node-cli-app#readme"
+  "homepage": "https://github.com/pmbenjamin/node-cli-app#readme",
+  "dependencies": {
+    "commander": "^2.9.0"
+  }
 }
