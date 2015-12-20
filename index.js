@@ -1,12 +1,18 @@
 #!/usr/bin/env node
 'use strict';
-
+/**
+ * Require dependencies
+ *
+ */
 const program = require('commander'),
     chalk = require("chalk"),
     exec = require('child_process').exec,
-    
     pkg = require('./package.json');
 
+/**
+ * list function definition
+ *
+ */
 let list = (directory,options)  => {
     const cmd = 'ls';
     
@@ -28,6 +34,10 @@ let list = (directory,options)  => {
     
 };
 
+/**
+ * help function definition
+ *
+ */
 let helpList = () => console.log("List Help");
 
 program
@@ -40,4 +50,5 @@ program
 
 program.parse(process.argv);
 
-if (!program.argv) program.help();
+// if program was called with no arguments, show help.
+if (program.args.length === 0) program.help();
