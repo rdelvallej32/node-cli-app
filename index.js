@@ -1,41 +1,34 @@
 #!/usr/bin/env node
+'use strict';
+
 const program = require('commander'),
     chalk = require("chalk"),
-    spawn = require('child_process').spawn,
+    exec = require('child_process').exec,
     
     pkg = require('./package.json');
 
-function list (directory,options) {
-    var dir = directory;
+let list = (directory,options)  => {
+    const cmd = 'ls';
     
-    var cmd = 'ls',
+    let dir = directory,
         params = [];
     
-    if (options.all) params.push("-a");
-    if (options.long) params.push("-l");
+    if (options.all) params.push("a");
+    if (options.long) params.push("l");
+    let parameterizedCommand = params.length ? cmd + ' -' + params.join('') : cmd;
     
-    var ls = params.length === 0 ? spawn(cmd) : spawn(cmd,params);
     
-    //success
-    ls.stdout.on('data',function(data){
-        var result = data.toString('utf8');
-        console.log(chalk.green.bold.underline("Result:"));
-        console.log(result);
-    });
+    let output = (error, stdout, stderr) => {
+        if (error) console.log(chalk.red.bold.underline("exec error:") + error);
+        if (stdout) console.log(chalk.green.bold.underline("Result:") + stdout);
+        if (stderr) console.log(chalk.red("Error: ") + stderr);
+    };
     
-    //error
-    ls.stderr.on('data', function(err){
-        var error = chalk.red(err.toString('utf8'));
-        console.log(chalk.red.bold.underline("Error:"));
-        console.log(error);
-    });
+    exec(parameterizedCommand,output);
     
-    ls.kill();
-}
+};
 
-function helpList(){
-    console.log("List Help");
-}
+let helpList = () => console.log("List Help");
 
 program
     .version(pkg.version)
@@ -46,3 +39,5 @@ program
     .on('--help',helpList);
 
 program.parse(process.argv);
+
+if (!program.argv) program.help();
