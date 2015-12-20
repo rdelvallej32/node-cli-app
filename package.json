@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "cli-app": "index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/pmbenjamin/node-cli-app.git"
@@ -21,6 +24,7 @@
   },
   "homepage": "https://github.com/pmbenjamin/node-cli-app#readme",
   "dependencies": {
+    "chalk": "^1.1.1",
     "commander": "^2.9.0"
   }
 }
