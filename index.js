@@ -27,9 +27,9 @@ function list (directory,options) {
     ls.stderr.on('data', function(err){
         var error = chalk.red(err.toString('utf8'));
         // chalk.red(cmd,params);
-        // chalk.red.bold("Error:");
+        console.log(chalk.red.bold("Error:"));
         // chalk.red.underline("Command: " + cmd + params);
-        // chalk.red(error);
+        console.log(error);
     });
     
     ls.kill();
