@@ -19,16 +19,14 @@ function list (directory,options) {
     //success
     ls.stdout.on('data',function(data){
         var result = data.toString('utf8');
-        console.log(chalk.green.bold("Result:"));
+        console.log(chalk.green.bold.underline("Result:"));
         console.log(result);
     });
     
     //error
     ls.stderr.on('data', function(err){
         var error = chalk.red(err.toString('utf8'));
-        // chalk.red(cmd,params);
-        console.log(chalk.red.bold("Error:"));
-        // chalk.red.underline("Command: " + cmd + params);
+        console.log(chalk.red.bold.underline("Error:"));
         console.log(error);
     });
     
