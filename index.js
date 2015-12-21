@@ -15,14 +15,14 @@ const program = require('commander'),
  */
 let list = (directory,options)  => {
     const cmd = 'ls';
-    
-    let dir = directory,
-        params = [];
+    let params = [];
     
     if (options.all) params.push("a");
     if (options.long) params.push("l");
-    let parameterizedCommand = params.length ? cmd + ' -' + params.join('') : cmd;
-    
+    let parameterizedCommand = params.length 
+                                ? cmd + ' -' + params.join('') 
+                                : cmd ;
+    if (directory) parameterizedCommand += ' ' + directory ;
     
     let output = (error, stdout, stderr) => {
         if (error) console.log(chalk.red.bold.underline("exec error:") + error);
@@ -34,19 +34,13 @@ let list = (directory,options)  => {
     
 };
 
-/**
- * help function definition
- *
- */
-let helpList = () => console.log("List Help");
 
 program
     .version(pkg.version)
     .command('list [directory]')
     .option('-a, --all', 'List all')
     .option('-l, --long','Long list format')
-    .action(list)
-    .on('--help',helpList);
+    .action(list);
 
 program.parse(process.argv);
 
